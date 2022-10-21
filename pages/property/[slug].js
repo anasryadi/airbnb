@@ -1,5 +1,6 @@
 import { sanityClient } from "../../sanity";
 import { isMultiple } from "../../utils";
+import Image from "../../components/Image";
 
 const Property = ({
   title,
@@ -14,48 +15,63 @@ const Property = ({
   host,
   reviews,
 }) => {
-    const reviewAmount = reviews.length
+  const reviewAmount = reviews.length;
+  console.log(images)
   return (
     <div className="container">
       <h1>
         <b>{title}</b>
       </h1>
+      <p>
+        {reviewAmount} review{isMultiple(reviewAmount)}
+      </p>
+      <div className="images-section">
+        <Image identifier="main-image" image={mainImage} />
+        <div className="sub-images-section">
+          {/* {images.map((_key, image) => (
+            <Image identifier="image" image={image} />
+          ))} */}
+          {/* {images.map(({ _key, asset }, image) => (
+            <Image key={_key} identifier="image" image={asset} />
+          ))} */}
+        </div>
+      </div>
       <h2>
         <b>
           {propertyType} hosted by {host?.name}
         </b>
       </h2>
+      {bedrooms} bedroom{isMultiple(bedrooms)} * {beds} bed{isMultiple(beds)}
       <h4>
-        {bedrooms} bedroom{isMultiple(bedrooms)} * {beds} bed{isMultiple(beds)}
-        <hr />
-        <h4>
-          <b>Enhanced Clean</b>
-        </h4>
-        <p>
-          This host is committed to Airbnb's 5-step enhanced cleaning process
-        </p>
-        <h4>
-          <b>Amenities for everyday living</b>
-        </h4>
-        <p>
-          The host has equipped this place for long stays - kitchen, shampoo,
-          conditioner, hairdryer included
-        </p>
-        <h4>
-          <b>House rules</b>
-        </h4>
-        <p>
-          This place isn't suitable for pets and the host does not allow parties
-          or smoking.
-        </p>
-        <div className="price-box">
-          <h2>${pricePerNight}</h2>
-          <h4>
-            {reviewAmount} review{isMultiple(reviewAmount)}
-          </h4>
-          <div className="button" onClick={() => {}}>Change Dates</div>
-        </div>
+        <b>Enhanced Clean</b>
       </h4>
+      <hr />
+      <p>
+        This host is committed to Airbnb's 5-step enhanced cleaning process.
+      </p>
+      <h4>
+        <b>Amenities for everyday living</b>
+      </h4>
+      <p>
+        The host has equipped this place for long stays - kitchen, shampoo,
+        conditioner, hairdryer included
+      </p>
+      <h4>
+        <b>House rules</b>
+      </h4>
+      <p>
+        This place isn't suitable for pets and the host does not allow parties
+        or smoking.
+      </p>
+      <div className="price-box">
+        <h2>${pricePerNight}</h2>
+        <h4>
+          {reviewAmount} review{isMultiple(reviewAmount)}
+        </h4>
+        <div className="button" onClick={() => {}}>
+          Change Dates
+        </div>
+      </div>
     </div>
   );
 };
