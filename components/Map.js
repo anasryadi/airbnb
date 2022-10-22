@@ -1,46 +1,60 @@
-import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import React from "react";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 
-const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
-
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
-
-function MyComponent() {
+const Map = ({ location }) => {
   const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: process.env.googlePlacesApiKey
-  })
+    id: "google-map-script",
+    googleMapsApiKey: process.env.googlePlacesApiKey,
+  });
 
-  const [map, setMap] = React.useState(null)
+  console.log("location.lat", location.lat);
+
+  const containerStyle = {
+    width: "100%",
+    height: "400px",
+  };
+
+  console.log(location.lat);
+  const center = {
+    lat: location.lat,
+    lng: location.lng,
+  };
+
+  const [map, setMap] = React.useState(null);
 
   const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
-    setMap(map)
-  }, [])
+    setMap(map);
+  }, []);
 
   const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
+    setMap(null);
+  }, []);
+
+  const image =
+    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
 
   return isLoaded ? (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
-      </GoogleMap>
-  ) : <></>
-}
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={10}
+      onLoad={onLoad}
+      onUnmount={onUnmount}
+    >
+      <Marker
+        position={{ lat: location.lat, lng: location.lng }}
+        icon={{
+          url: image,
+          anchor: new google.maps.Point(5, 58),
+        }}
+      />
+      <></>
+    </GoogleMap>
+  ) : (
+    <></>
+  );
+};
 
-export default React.memo(MyComponent)
+export default React.memo(Map);

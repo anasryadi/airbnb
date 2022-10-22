@@ -2,6 +2,8 @@ import { sanityClient } from "../../sanity";
 import { isMultiple } from "../../utils";
 import Image from "../../components/Image";
 import Review from "../../components/Review";
+import Map from "../../components/Map";
+import Link from "next/link";
 
 const Property = ({
   title,
@@ -75,9 +77,11 @@ const Property = ({
           <h4>
             {reviewAmount} review{isMultiple(reviewAmount)}
           </h4>
-          <div className="button" onClick={() => {}}>
+          <Link href="/">
+          <div className="button">
             Change Dates
           </div>
+          </Link>
         </div>
       </div>
 
@@ -96,8 +100,7 @@ const Property = ({
       <hr />
 
       <h2>Location</h2>
-
-      
+      <Map location={location}></Map>
     </div>
   );
 };
