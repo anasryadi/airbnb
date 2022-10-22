@@ -35,9 +35,9 @@ const Property = ({
           {/* {images.map((_key, image) => (
             <Image identifier="image" image={image} />
           ))} */}
-          {/* {images.map(({ _key, asset }, image) => (
+          {images.map(({ _key, asset }, image) => (
             <Image key={_key} identifier="image" image={asset} />
-          ))} */}
+          ))}
         </div>
       </div>
 

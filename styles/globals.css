@@ -113,3 +113,18 @@ body {
   max-width: 250px;
   border-radius: 20px;
 }
+
+.image {
+  width: 50%;
+}
+
+.image img {
+  width: 100%;
+}
+
+.sub-images-section {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
